@@ -28,7 +28,7 @@ def deploy(
         on_schema_break=algokit_utils.OnSchemaBreak.AppendApp,
         on_update=algokit_utils.OnUpdate.AppendApp,
     )
-    name = "world"
+    name = "Maharshi"
     response = app_client.hello(name=name)
     logger.info(
         f"Called hello on {app_spec.contract.name} ({app_client.app_id}) "
