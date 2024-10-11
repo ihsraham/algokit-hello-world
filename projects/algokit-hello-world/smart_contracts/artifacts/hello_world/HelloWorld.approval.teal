@@ -9,10 +9,12 @@ smart_contracts.hello_world.contract.HelloWorld.approval_program:
 __puya_arc4_router__:
     proto 0 1
     txn NumAppArgs
-    bz __puya_arc4_router___bare_routing@5
+    bz __puya_arc4_router___bare_routing@7
     method "hello(string)string"
+    method "read_greeting()string"
+    method "is_initialized()byte[]"
     txna ApplicationArgs 0
-    match __puya_arc4_router___hello_route@2
+    match __puya_arc4_router___hello_route@2 __puya_arc4_router___read_greeting_route@3 __puya_arc4_router___is_initialized_route@4
     int 0
     retsub
 
@@ -38,16 +40,56 @@ __puya_arc4_router___hello_route@2:
     int 1
     retsub
 
-__puya_arc4_router___bare_routing@5:
+__puya_arc4_router___read_greeting_route@3:
     txn OnCompletion
-    bnz __puya_arc4_router___after_if_else@9
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub read_greeting
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___is_initialized_route@4:
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub is_initialized
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    byte 0x151f7c75
+    swap
+    concat
+    log
+    int 1
+    retsub
+
+__puya_arc4_router___bare_routing@7:
+    txn OnCompletion
+    bnz __puya_arc4_router___after_if_else@11
     txn ApplicationID
     !
     assert // is creating
     int 1
     retsub
 
-__puya_arc4_router___after_if_else@9:
+__puya_arc4_router___after_if_else@11:
     int 0
     retsub
 
@@ -58,4 +100,44 @@ hello:
     byte "Hello, "
     frame_dig -1
     concat
+    byte 0x6772656574696e67
+    box_del
+    pop
+    byte 0x6772656574696e67
+    dig 1
+    box_put
+    byte 0x696e697469616c697a6564
+    box_del
+    pop
+    byte 0x696e697469616c697a6564
+    byte 0x31
+    box_put
+    retsub
+
+
+// smart_contracts.hello_world.contract.HelloWorld.read_greeting() -> bytes:
+read_greeting:
+    proto 0 1
+    byte 0x696e697469616c697a6564
+    box_get
+    assert // check self.initialized exists
+    byte 0x31
+    ==
+    bz read_greeting_after_if_else@2
+    byte 0x6772656574696e67
+    box_get
+    assert // check self.greeting_box exists
+    retsub
+
+read_greeting_after_if_else@2:
+    byte "No greeting stored yet."
+    retsub
+
+
+// smart_contracts.hello_world.contract.HelloWorld.is_initialized() -> bytes:
+is_initialized:
+    proto 0 1
+    byte 0x696e697469616c697a6564
+    box_get
+    assert // check self.initialized exists
     retsub
