@@ -1,20 +1,34 @@
 # algokit-hello-world
 
-Welcome to my AlgoKit project! This workspace demonstrates a simple "Hello World" smart contract deployment on the Algorand TestNet using AlgoKit.
+Welcome to my AlgoKit project! 
+
+I've developed an Algorand smart contract using AlgoKit and AlgoPy that stores and retrieves greetings in blockchain storage boxes. The contract includes methods for initializing, setting, and reading greetings. Alongside this, a deployment script was created to interact with the contract, handling deployment, method calls, and information retrieval.
+
+Key nuances:
+1. BoxMap was used for persistent on-chain storage, adapting to Algorand's box storage mechanism.
+2. Error handling and logging were implemented to manage potential issues in contract interactions.
+3. To optimize for Algorand's fast finality, arbitrary delays were replaced with transaction confirmation checks.
+4. Repetitive operations were consolidated into reusable functions for cleaner code.
+5. Proper formatting of box keys and handling of potential box existence issues were ensured.
+
+This approach resulted in a robust, efficient smart contract deployment and interaction process, tailored to Algorand's specific features and best practices.
 
 ## Smart Contract Deployment
 
-We've successfully deployed our "Hello World" smart contract to the Algorand TestNet. You can view the transaction on the Lora explorer:
+We've successfully deployed our "HelloWorld" smart contract to the Algorand TestNet. You can view the application on the Lora explorer:
 
-[View Transaction on Lora Explorer](https://lora.algokit.io/testnet/application/723285415)
+[View Application on Lora Explorer](https://lora.algokit.io/testnet/application/723957113)
 
-<img src="https://github.com/user-attachments/assets/3c104347-dfa2-4b72-8923-47eab4b0f3c2" alt="Lora Explorer Screenshot" width="1000">
+<img width="2278" alt="image" src="https://github.com/user-attachments/assets/434463c6-9b74-4077-8ed9-e81a24465232">
+
+
+<img width="2278" alt="image" src="https://github.com/user-attachments/assets/2208533e-302f-4974-a3bf-93f370855ca7">
+
 
 ## Deployment Process
 
 Here's a screenshot of the terminal showing the logs during the deployment process:
-
-<img width="1000" alt="Deployment Logs" src="https://github.com/user-attachments/assets/c5354378-dd97-4e19-b8e5-c1e8ff0f53cf">
+<img width="1412" alt="image" src="https://github.com/user-attachments/assets/bb8d2b56-2921-4845-acd0-f87544e819ee">
 
 ## Feedback on the AlgoKit Guide
 
@@ -43,17 +57,7 @@ After following the [AlgoKit Getting Started Guide](https://developer.algorand.o
 
 These improvements would greatly enhance the user experience for developers new to AlgoKit and the Algorand ecosystem.
 
-## Next Steps
 
-I'm excited to continue exploring Algorand's potential. Here are some areas I'm keen to dive into:
-
-- Integrating responsive frontend frameworks with Algorand smart contracts
-- Developing more complex smart contract logic, exploring TEAL's advanced features
-- Experimenting with Algorand Standard Assets (ASA) creation and management
-- Optimizing performance and minimizing costs for Algorand transactions
-- Engaging with the Algorand developer community and contributing to open-source projects
-
-This project has sparked my enthusiasm for Algorand development, and I'm eager to leverage its speed, security, and scalability to build innovative decentralized applications. I believe Algorand has the potential to revolutionize various industries, and I'm excited to be part of this journey.
 
 ---
 
